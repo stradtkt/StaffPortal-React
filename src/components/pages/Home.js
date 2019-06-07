@@ -32,14 +32,25 @@ class Home extends Component {
     }
     render() {
         if(this.state.authenticated === null) return null;
-        const button = this.state.authenticated ?
-            <button onClick={this.logout}>Logout</button> :
-            <button onClick={this.login}>Login</button>
+        const mainContent = this.state.authenticated ?
+            (
+                <div>
+                    <p className="lead">
+                        You have entered the staff portal, <Link to="/staff">click here</Link>
+                    </p>
+                    <button className="btn btn-light btn-lg" onClick={this.logout}>Logout</button>
+                </div>
+            ) :
+            (
+                <div>
+                    <p className="lead">If you are a staff member, please get your credentials from your supervisor</p>
+                    <button className="btn btn-dark btn-lg" onClick={this.login}>Login</button>
+                </div>
+            )
         return (
-            <div>
-                <Link to="/">Home</Link> <br/>
-                <Link to="/protected">Protected</Link> <br/>
-                {button}
+            <div className="jumbotron">
+                <h1 className="display-4">Staff Portal</h1>
+                {mainContent}
             </div>
         );
     }
